@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="include\pan360">
+      <UniqueIdentifier>{c4cb9102-b310-464b-8bc1-052f976e91ce}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\dllmain.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\p360_debug.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\p360_common.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\p360_globals.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\p360_jpeg_libjpeg.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\p360_buffer.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\p360_image.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\p360_mem.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\p360_fileutils.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\p360_gl_shader.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\pan360\p360_obj.h">
+      <Filter>include\pan360</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pan360\p360_api.h">
+      <Filter>include\pan360</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pan360\p360_debug.h">
+      <Filter>include\pan360</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pan360\p360_common.h">
+      <Filter>include\pan360</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pan360\p360_config.h">
+      <Filter>include\pan360</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pan360\p360_globals.h">
+      <Filter>include\pan360</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pan360\p360_buffer.h">
+      <Filter>include\pan360</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pan360\p360_image.h">
+      <Filter>include\pan360</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pan360\p360_mem.h">
+      <Filter>include\pan360</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pan360\p360_fileutils.h">
+      <Filter>include\pan360</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pan360\p360_gl_shader.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pan360\p360_gl_headers.h">
+      <Filter>include\pan360</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
