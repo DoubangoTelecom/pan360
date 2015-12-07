@@ -50,6 +50,11 @@ bool P360FileUtils::exists(const char* pcPath)
     return (stat(pcPath, &st_) == 0);
 }
 
+bool P360FileUtils::empty(const char* pcPath)
+{
+    return (P360FileUtils::getSize(pcPath) == 0);
+}
+
 size_t P360FileUtils::getSize(const char* pcPath)
 {
     if (!pcPath) {
@@ -114,12 +119,12 @@ _P360_IMAGE_FORMAT P360FileUtils::getImageFormat(const char* pcPath)
     }
 }
 
-P360ObjWrapper<P360Buffer*> P360FileUtils::read(const char* pcPath)
+P360_ERROR_CODE P360FileUtils::read(const char* pcPath, P360ObjWrapper<P360Buffer*> *buffer)
 {
     P360ObjWrapper<P360Buffer*> buffer_ = NULL;
-    if (!pcPath) {
+    if (!pcPath || !buffer) {
         P360_DEBUG_ERROR_EX(kModuleNameFileUtils, "Invalid parameter");
-        return NULL;
+        return P360_ERROR_CODE_E_INVALID_PARAMETER;
     }
     size_t size_ = P360FileUtils::getSize(pcPath);
     if (size_ > 0) {
@@ -127,13 +132,20 @@ P360ObjWrapper<P360Buffer*> P360FileUtils::read(const char* pcPath)
         void* mem_ = NULL;
         if ((file_ = fopen(pcPath, "rb")) == NULL) {
             P360_DEBUG_ERROR_EX(kModuleNameFileUtils, "Can't open %s", pcPath);
-            return NULL;
+            return P360_ERROR_CODE_E_FILE_NOT_FOUND;
         }
         mem_ = P360Mem::Malloc(size_);
         if (!mem_) {
             P360_DEBUG_ERROR_EX(kModuleNameFileUtils, "Failed to alloc mem with size = %lu", size_);
             fclose(file_);
-            return NULL;
+            return P360_ERROR_CODE_E_OUT_OF_MEMORY;
+        }
+        size_t read_;
+        if (size_ != (read_ = fread(mem_, 1, size_, file_))) {
+            P360_DEBUG_ERROR_EX(kModuleNameFileUtils, "fread(%s) returned %lu instead of %lu", pcPath, read_, size_);
+            fclose(file_);
+            P360Mem::Free(&mem_);
+            return P360_ERROR_CODE_E_FAILED_TO_READ_FILE;
         }
         if (P360_ERROR_CODE_IS_NOK(P360Buffer::newObjAndTakeData(&mem_, size_, &buffer_))) {
             P360_DEBUG_ERROR_EX(kModuleNameFileUtils, "Failed to create new P360Buffer object");
@@ -141,6 +153,7 @@ P360ObjWrapper<P360Buffer*> P360FileUtils::read(const char* pcPath)
         fclose(file_);
         P360Mem::Free(&mem_);
     }
-    return buffer_;
+    *buffer = buffer_;
+    return P360_ERROR_CODE_S_OK;
 }
 

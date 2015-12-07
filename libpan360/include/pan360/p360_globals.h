@@ -23,9 +23,13 @@
 #include "pan360/p360_config.h"
 #include "pan360/p360_common.h"
 
-P360_API P360_ERROR_CODE P360Init();
-P360_API bool P360IsInitialized();
-P360_API const char* P360GetErrorString(P360_ERROR_CODE code);
-
+class P360_API P360Globals {
+public:
+	static P360_ERROR_CODE init();
+	static bool isInitialized();
+	static const char* getErrorString(P360_ERROR_CODE code);
+private:
+	static bool s_bInitialized;
+};
 
 #endif /* _PAN360_GLOBALS_H_ */

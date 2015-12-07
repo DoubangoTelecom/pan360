@@ -70,9 +70,13 @@ typedef enum _P360_ERROR_CODE {
 	P360_ERROR_CODE_E_INVALID_PIXEL_FORMAT,
 	P360_ERROR_CODE_E_INVALID_IMAGE_FORMAT,
 	P360_ERROR_CODE_E_FAILED_TO_OPEN_FILE,
+	P360_ERROR_CODE_E_FAILED_TO_READ_FILE,
 	P360_ERROR_CODE_E_OUT_OF_MEMORY,
 	P360_ERROR_CODE_E_DECODER_NOT_FOUND,
+	P360_ERROR_CODE_E_FILE_NOT_FOUND,
 	P360_ERROR_CODE_E_SYSTEM,
+	P360_ERROR_CODE_E_GL,
+	P360_ERROR_CODE_E_GLEW,
 
 	P360_ERROR_CODE_F = kErrorCodeFatalStart,
 }
@@ -87,6 +91,7 @@ P360_ERROR_CODE;
 #define P360_ERROR_CODE_IS_FATAL(code_) ((code_) >= kErrorCodeFatalStart)
 
 // In P360_CHECK_HR(x) When (x) is a function it will be executed twice when used in "P360_DEBUG_ERROR(x)" and "If(x)"
+extern const char* P360GetErrorString(P360_ERROR_CODE code);
 #define P360_CHECK_CODE_BAIL(x) { P360_ERROR_CODE __code__ = (x); if (P360_ERROR_CODE_IS_NOK(__code__)) { P360_DEBUG_ERROR("Operation Failed (%s)", P360GetErrorString(__code__)); goto bail; } }
 #define P360_CHECK_CODE_RETURN(x) { P360_ERROR_CODE __code__ = (x); if (P360_ERROR_CODE_IS_NOK(__code__)) { P360_DEBUG_ERROR("Operation Failed (%s)", P360GetErrorString(__code__)); return __code__; } }
 

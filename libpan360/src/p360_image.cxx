@@ -18,7 +18,6 @@
 * along with PAN360.
 */
 #include "pan360/p360_image.h"
-#include "pan360/p360_globals.h"
 #include "pan360/p360_fileutils.h"
 #include "pan360/p360_debug.h"
 

@@ -26,6 +26,7 @@
     <ClCompile Include="src\p360_fileutils.cxx" />
     <ClCompile Include="src\p360_globals.cxx" />
     <ClCompile Include="src\p360_gl_shader.cxx" />
+    <ClCompile Include="src\p360_gl_utils.cxx" />
     <ClCompile Include="src\p360_image.cxx" />
     <ClCompile Include="src\p360_jpeg_libjpeg.cxx" />
     <ClCompile Include="src\p360_mem.cxx" />
@@ -40,6 +41,7 @@
     <ClInclude Include="include\pan360\p360_globals.h" />
     <ClInclude Include="include\pan360\p360_gl_headers.h" />
     <ClInclude Include="include\pan360\p360_gl_shader.h" />
+    <ClInclude Include="include\pan360\p360_gl_utils.h" />
     <ClInclude Include="include\pan360\p360_image.h" />
     <ClInclude Include="include\pan360\p360_mem.h" />
     <ClInclude Include="include\pan360\p360_obj.h" />
@@ -109,7 +111,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;HAVE_LIBJPEG;HAVE_GL_GLEW_H;PAN360_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;HAVE_LIBJPEG;HAVE_GL_GLEW_H;GLEW_STATIC;PAN360_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>include;../thirdparties/windows/include/libjpeg-turbo-1.3.1;../thirdparties/windows/include/glew-1.13.0</AdditionalIncludeDirectories>
     </ClCompile>
@@ -125,7 +127,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;HAVE_LIBJPEG;HAVE_GL_GLEW_H;PAN360_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;HAVE_LIBJPEG;HAVE_GL_GLEW_H;GLEW_STATIC;PAN360_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>include;../thirdparties/windows/include/libjpeg-turbo-1.3.1;../thirdparties/windows/include/glew-1.13.0</AdditionalIncludeDirectories>
     </ClCompile>
@@ -133,7 +135,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>libjpeg.lib;glew32s.lib;OpenGL32.lib;Glu32.lib;Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../thirdparties/windows/lib/libjpeg-turbo-1.3.1/Win64/Debug;../thirdparties/windows/lib/glew-1.13.0/Release/Win32</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../thirdparties/windows/lib/libjpeg-turbo-1.3.1/Win64/Debug;../thirdparties/windows/lib/glew-1.13.0/Release/x64</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -143,7 +145,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;HAVE_LIBJPEG;HAVE_GL_GLEW_H;PAN360_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;HAVE_LIBJPEG;HAVE_GL_GLEW_H;GLEW_STATIC;PAN360_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>include;../thirdparties/windows/include/libjpeg-turbo-1.3.1;../thirdparties/windows/include/glew-1.13.0</AdditionalIncludeDirectories>
     </ClCompile>
@@ -163,7 +165,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;HAVE_LIBJPEG;HAVE_GL_GLEW_H;PAN360_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;HAVE_LIBJPEG;HAVE_GL_GLEW_H;GLEW_STATIC;PAN360_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>include;../thirdparties/windows/include/libjpeg-turbo-1.3.1;../thirdparties/windows/include/glew-1.13.0</AdditionalIncludeDirectories>
     </ClCompile>
@@ -173,7 +175,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>libjpeg.lib;glew32s.lib;OpenGL32.lib;Glu32.lib;Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../thirdparties/windows/lib/libjpeg-turbo-1.3.1/Win64/Debug;../thirdparties/windows/lib/glew-1.13.0/Release/Win64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../thirdparties/windows/lib/libjpeg-turbo-1.3.1/Win64/Debug;../thirdparties/windows/lib/glew-1.13.0/Release/x64</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

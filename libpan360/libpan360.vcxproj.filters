@@ -48,6 +48,9 @@
     <ClCompile Include="src\p360_gl_shader.cxx">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\p360_gl_utils.cxx">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\pan360\p360_obj.h">
@@ -80,10 +83,13 @@
     <ClInclude Include="include\pan360\p360_fileutils.h">
       <Filter>include\pan360</Filter>
     </ClInclude>
-    <ClInclude Include="include\pan360\p360_gl_shader.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\pan360\p360_gl_headers.h">
+      <Filter>include\pan360</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pan360\p360_gl_utils.h">
+      <Filter>include\pan360</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pan360\p360_gl_shader.h">
       <Filter>include\pan360</Filter>
     </ClInclude>
   </ItemGroup>

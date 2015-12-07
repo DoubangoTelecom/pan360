@@ -23,19 +23,28 @@
 #include "pan360/p360_config.h"
 #include "pan360/p360_obj.h"
 
-class P360_API P360GlShaderProg
+class P360_API P360GLShaderProg : public P360Obj
 {
 private:
-	P360GlShaderProg();
+	P360GLShaderProg();
 public:
-	virtual ~P360GlShaderProg();
+	virtual ~P360GLShaderProg();
+	virtual P360_INLINE const char* getObjectId() { return "P360GLShaderProg"; };
 
-	static P360_ERROR_CODE newObj(const void* pcPtr, size_t size, P360ObjWrapper<P360GlShaderProg*>* shaderProg);
+	P360_ERROR_CODE shaderAttachVertex(const char* pcFilePath);
+	P360_ERROR_CODE shaderAttachFragment(const char* pcFilePath);
+	P360_ERROR_CODE link();
+	P360_ERROR_CODE useBegin();
+	P360_ERROR_CODE useEnd();
+	static P360_ERROR_CODE newObj(P360ObjWrapper<P360GLShaderProg*>* shaderProg);
+
+private:
+	P360_ERROR_CODE shaderAttach(const char* pcFilePath, bool vertType);
 
 private:
 	// Pimpl Idiom: http://c2.com/cgi/wiki?PimplIdiom
-	struct P360GlShaderProgPriv;
-	P360GlShaderProgPriv* m_pPriv;
+	struct P360GLShaderProgPriv;
+	P360GLShaderProgPriv* m_pPriv;
 };
 
 #endif /* _PAN360_GL_SHARDER_H_ */

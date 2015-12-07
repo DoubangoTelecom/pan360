@@ -17,8 +17,8 @@
 * You should have received a copy of the GNU General Public License
 * along with PAN360.
 */
-#if !defined(_PAN360_GL_HEADERS_H_)
-#define _PAN360_GL_HEADERS_H_
+#if !defined(_PAN360_PRIV_GL_HEADERS_H_)
+#define _PAN360_PRIV_GL_HEADERS_H_
 
 #include "pan360/p360_config.h"
 #include "pan360/p360_common.h"
@@ -40,4 +40,4 @@
 #	endif
 #endif /* HAVE_GL_GLEW_H */
 
-#endif /* _PAN360_GL_HEADERS_H_ */
+#endif /* _PAN360_PRIV_GL_HEADERS_H_ */

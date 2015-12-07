@@ -11,6 +11,8 @@
 #include <GLFW/glfw3.h>
 
 #define JPEG_FILENAME "./jpeg_224x224.jpg" // "./jpeg_690x690.jpg"
+#define GLSL_FILE_GLSL_VERT_NAME	"test.vert.glsl"
+#define GLSL_FILE_GLSL_FRAG_NAME	"test.frag.glsl"
 
 static void error_callback(int error, const char* description);
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -25,11 +27,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
     // Set callback function
     glfwSetErrorCallback(error_callback);
-
-    /* Initialize PAN360 library */
-    if (P360_ERROR_CODE_IS_NOK(P360Init())) {
-        exit(EXIT_FAILURE);
-    }
 
     /* Initialize GLFW library */
     if (glfwInit() != GL_TRUE) {
@@ -47,6 +44,11 @@ int _tmain(int argc, _TCHAR* argv[])
     glfwSetKeyCallback(s_pWindow, key_callback);
     glfwSetWindowSizeCallback(s_pWindow, window_size_callback);
 
+    /* Initialize PAN360 library (must be after setting current context to make sure GlewInit() will work) */
+    if (P360_ERROR_CODE_IS_NOK(P360Globals::init())) {
+        exit(EXIT_FAILURE);
+    }
+
     // Init GLEW after setting the current GL context
     GLenum glewErr = glewInit();
     if (GLEW_OK != glewErr) {
@@ -57,6 +59,26 @@ int _tmain(int argc, _TCHAR* argv[])
 
     // Default background color
     glClearColor(0.f, 0.f, 0.f, 1.f);
+
+    // Create GL program (Must be called after context setting)
+    P360ObjWrapper<P360GLShaderProg*> shaderProg;
+    if (P360_ERROR_CODE_IS_NOK(P360GLShaderProg::newObj(&shaderProg))) {
+        exit(EXIT_FAILURE);
+    }
+    if (P360_ERROR_CODE_IS_NOK(shaderProg->shaderAttachVertex(GLSL_FILE_GLSL_VERT_NAME))) {
+        exit(EXIT_FAILURE);
+    }
+    if (P360_ERROR_CODE_IS_NOK(shaderProg->shaderAttachFragment(GLSL_FILE_GLSL_FRAG_NAME))) {
+        exit(EXIT_FAILURE);
+    }
+    if (P360_ERROR_CODE_IS_NOK(shaderProg->link())) {
+        exit(EXIT_FAILURE);
+    }
+    if (P360_ERROR_CODE_IS_NOK(shaderProg->useBegin())) {
+        exit(EXIT_FAILURE);
+    }
+
+
 
     // Decode the jpeg image
     P360ObjWrapper<P360Image*> image;

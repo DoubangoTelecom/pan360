@@ -32,10 +32,11 @@ private:
 public:
 	virtual ~P360FileUtils();
 	static bool exists(const char* pcPath);
+	static bool empty(const char* pcPath);
 	static size_t getSize(const char* pcPath);
 	static std::string getExt(const char* pcPath);
 	static _P360_IMAGE_FORMAT getImageFormat(const char* pcPath);
-	static P360ObjWrapper<P360Buffer*> read(const char* pcPath);
+	static P360_ERROR_CODE read(const char* pcPath, P360ObjWrapper<P360Buffer*> *buffer);
 };
 
 #endif /* _PAN360_FILEUTILS_H_ */

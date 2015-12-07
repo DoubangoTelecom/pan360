@@ -19,35 +19,49 @@
 */
 #include "pan360/p360_globals.h"
 #include "pan360/p360_image.h"
+#include "pan360/p360_gl_headers.h"
 #include "pan360/p360_debug.h"
 
-static bool s_bInitialized = false;
+bool P360Globals::s_bInitialized = false;
 
-P360_ERROR_CODE P360Init()
+P360_ERROR_CODE P360Globals::init()
 {
     P360_ERROR_CODE err_ = P360_ERROR_CODE_S_OK;
 
-    if (s_bInitialized) {
+    if (P360Globals::s_bInitialized) {
         return P360_ERROR_CODE_S_OK;
     }
 
     P360_DEBUG_INFO("Initializing engine (v %s)...", P360_VERSION_STRING);
+#if defined(HAVE_GL_GLEW_H)
+    GLenum glewErr = glewInit();
+    if (GLEW_OK != glewErr) {
+        P360_DEBUG_ERROR("Initializing GLEW failed (%d): %s", glewErr, glewGetErrorString(glewErr));
+        return P360_ERROR_CODE_E_GLEW;
+    }
+#endif
 
-    P360_CHECK_CODE_BAIL(P360ImageDecoder::init());
+    P360_CHECK_CODE_BAIL(err_ = P360ImageDecoder::init());
 
     P360_DEBUG_INFO("Engine initialized");
 
 bail:
-    s_bInitialized = P360_ERROR_CODE_IS_OK(err_);
+    P360Globals::s_bInitialized = P360_ERROR_CODE_IS_OK(err_);
     return err_;
 }
 
-bool P360IsInitialized()
+bool P360Globals::isInitialized()
 {
     return s_bInitialized;
 }
 
+// Private function used as extern
 const char* P360GetErrorString(P360_ERROR_CODE code)
+{
+    return P360Globals::getErrorString(code);
+}
+
+const char* P360Globals::getErrorString(P360_ERROR_CODE code)
 {
     switch (code) {
     case P360_ERROR_CODE_S_OK:

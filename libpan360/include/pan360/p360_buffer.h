@@ -35,6 +35,7 @@ public:
 	P360_ERROR_CODE takeData(void** ppPtr, size_t size);
 	P360_INLINE const void* getPtr() { return m_pPtr; }
 	P360_INLINE size_t getSize(){ return m_nSize; }
+	P360_INLINE bool isEmpty() { return !(getSize() && getPtr()); }
 	static P360_ERROR_CODE newObj(const void* pcPtr, size_t size, P360ObjWrapper<P360Buffer*>* buffer);
 	static P360_ERROR_CODE newObjAndNullData(P360ObjWrapper<P360Buffer*>* buffer);
 	static P360_ERROR_CODE newObjAndTakeData(void** ppPtr, size_t size, P360ObjWrapper<P360Buffer*>* buffer);
