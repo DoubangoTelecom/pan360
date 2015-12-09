@@ -41,7 +41,9 @@ struct P360GLShaderProg::P360GLShaderProgPriv {
         , m_bUsed(false) {
     }
     virtual ~P360GLShaderProgPriv() {
-
+		P360GLUtils::shaderDelete(m_uFragShaders);
+		P360GLUtils::shaderDelete(m_uVertShaders);
+		P360GLUtils::progDelete(&m_uProg);
     }
 };
 
@@ -54,9 +56,6 @@ P360GLShaderProg::P360GLShaderProg()
 P360GLShaderProg::~P360GLShaderProg()
 {
     if (m_pPriv) {
-        P360GLUtils::shaderDelete(m_pPriv->m_uFragShaders);
-        P360GLUtils::shaderDelete(m_pPriv->m_uVertShaders);
-        P360GLUtils::progDelete(&m_pPriv->m_uProg);
         delete m_pPriv;
     }
 }

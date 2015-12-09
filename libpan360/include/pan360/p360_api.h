@@ -24,6 +24,7 @@
 #include "pan360/p360_config.h"
 #include "pan360/p360_debug.h"
 #include "pan360/p360_gl_shader.h"
+#include "pan360/p360_gl_texture.h"
 #include "pan360/p360_globals.h"
 #include "pan360/p360_image.h"
 #include "pan360/p360_obj.h"

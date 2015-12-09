@@ -25,9 +25,6 @@
 
 #define kModuleNameGLUtils "GLUtils"
 
-#define __glu_h__
-#define __GLU_H__
-
 P360_ERROR_CODE P360GLUtils::getLastError(std::string *error)
 {
     GLenum err;
@@ -221,6 +218,83 @@ bail:
     return err_;
 }
 
+P360_ERROR_CODE P360GLUtils::textureCreate(GLuint* uText)
+{
+	if (uText) {
+		P360_ERROR_CODE err_ = P360_ERROR_CODE_S_OK;
+		std::string errString_;
+		GLuint text_;
+		*uText = 0;
+		glGenTextures(1, &text_); // returned value not texture yet until bind() is called
+		/*if (!P360GLUtils::textureIsValid(text_))*/ {
+			P360_CHECK_CODE_BAIL(err_ = P360GLUtils::getLastError(&errString_));
+			if (!text_) {
+				P360_CHECK_CODE_BAIL(err_ = P360_ERROR_CODE_E_GL);
+			}
+		}
+		*uText = text_;
+	bail:
+		if (!errString_.empty()) {
+			P360_DEBUG_ERROR_EX(kModuleNameGLUtils, "glGenTextures failed: %s", errString_.c_str());
+		}
+		return err_;
+	}
+	P360_DEBUG_ERROR_EX(kModuleNameGLUtils, "Invalid parameter");
+	return P360_ERROR_CODE_E_INVALID_PARAMETER;
+}
+
+P360_ERROR_CODE P360GLUtils::textureDelete(GLuint* uText)
+{
+	if (uText && *uText /*&& P360GLUtils::textureIsValid(*uText)*/) { // A texture is really a texture only after bind() -> do not use IsValid()
+		glDeleteTextures(1, uText);
+		*uText = 0;
+		return P360_ERROR_CODE_S_OK;
+	}
+	return P360_ERROR_CODE_E_INVALID_PARAMETER;
+}
+
+bool P360GLUtils::textureIsValid(GLuint uText)
+{
+	return uText != 0 && glIsTexture(uText) == GL_TRUE;
+}
+
+bool P360GLUtils::texture2DIsEnabled(GLuint uText)
+{
+	return (glIsEnabled(GL_TEXTURE_2D) == GL_TRUE);
+}
+
+P360_ERROR_CODE P360GLUtils::textureGetCurrent(GLuint* uText)
+{
+	if (uText) {
+		GLint text_ = 0;
+		glGetIntegerv(GL_TEXTURE_BINDING_2D, &text_);
+		if (P360GLUtils::textureIsValid(text_)) {
+			*uText = text_;
+		}
+		else {
+			*uText = 0;
+		}
+	}
+	return P360_ERROR_CODE_S_OK;
+}
+
+P360_ERROR_CODE P360GLUtils::textureSetCurrent(GLuint uText)
+{
+	P360_ERROR_CODE err_ = P360_ERROR_CODE_S_OK;
+	std::string errString_;
+	if (!P360GLUtils::textureIsValid(uText)) {
+		P360_DEBUG_ERROR_EX(kModuleNameGLUtils, "Invalid parameter");
+		return P360_ERROR_CODE_E_INVALID_PARAMETER;
+	}
+	glBindTexture(GL_TEXTURE_2D, uText);
+	P360_CHECK_CODE_BAIL(err_ = P360GLUtils::getLastError(&errString_));
+
+bail:
+	if (!errString_.empty()) {
+		P360_DEBUG_ERROR_EX(kModuleNameGLUtils, "glBindTexture failed: %s", errString_.c_str());
+	}
+	return err_;
+}
 
 P360_ERROR_CODE P360GLUtils::progCreate(GLuint* uProg)
 {
@@ -257,7 +331,7 @@ P360_ERROR_CODE P360GLUtils::progDelete(GLuint* uProg)
 
 bool P360GLUtils::progIsValid(GLuint uProg)
 {
-    return uProg != 0 && glIsProgram(uProg) == GL_TRUE;
+    return (uProg != 0 && glIsProgram(uProg) == GL_TRUE);
 }
 
 bool P360GLUtils::progIsUsed(GLuint uProg)

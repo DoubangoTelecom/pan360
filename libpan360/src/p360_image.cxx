@@ -126,6 +126,10 @@ bail:
 
 P360_ERROR_CODE P360ImageDecoder::decodeFile(const char* filePath, P360ObjWrapper<P360Image*>* image)
 {
+	if (P360FileUtils::empty(filePath) || !P360FileUtils::exists(filePath)) {
+		P360_DEBUG_ERROR_EX(kModuleNameImageDecoder, "File is empty or doesn't exist: %s", filePath);
+		P360_ERROR_CODE_E_INVALID_PARAMETER;
+	}
     _P360_IMAGE_FORMAT format_ = P360FileUtils::getImageFormat(filePath);
     P360_ERROR_CODE err_ = P360_ERROR_CODE_S_OK;
     switch (format_) {

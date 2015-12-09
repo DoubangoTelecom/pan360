@@ -26,6 +26,7 @@
     <ClCompile Include="src\p360_fileutils.cxx" />
     <ClCompile Include="src\p360_globals.cxx" />
     <ClCompile Include="src\p360_gl_shader.cxx" />
+    <ClCompile Include="src\p360_gl_texture.cxx" />
     <ClCompile Include="src\p360_gl_utils.cxx" />
     <ClCompile Include="src\p360_image.cxx" />
     <ClCompile Include="src\p360_jpeg_libjpeg.cxx" />
@@ -41,6 +42,7 @@
     <ClInclude Include="include\pan360\p360_globals.h" />
     <ClInclude Include="include\pan360\p360_gl_headers.h" />
     <ClInclude Include="include\pan360\p360_gl_shader.h" />
+    <ClInclude Include="include\pan360\p360_gl_texture.h" />
     <ClInclude Include="include\pan360\p360_gl_utils.h" />
     <ClInclude Include="include\pan360\p360_image.h" />
     <ClInclude Include="include\pan360\p360_mem.h" />

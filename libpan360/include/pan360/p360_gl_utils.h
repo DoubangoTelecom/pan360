@@ -46,6 +46,14 @@ public:
 	static P360_ERROR_CODE shaderCompileGetStatus(GLuint uShader, std::string *error);
 	static P360_ERROR_CODE shaderAttach(GLuint uProg, GLuint uShader);
 
+	static P360_ERROR_CODE textureCreate(GLuint* uText);
+	static P360_ERROR_CODE textureDelete(GLuint* uText);
+	static bool textureIsValid(GLuint uText);
+	static bool texture2DIsEnabled(GLuint uText);
+	static P360_ERROR_CODE texture2DEnable();
+	static P360_ERROR_CODE textureGetCurrent(GLuint* uText);
+	static P360_ERROR_CODE textureSetCurrent(GLuint uText);
+
 	static P360_ERROR_CODE progCreate(GLuint* uProg);
 	static P360_ERROR_CODE progDelete(GLuint* uProg);
 	static bool progIsValid(GLuint uProg);
